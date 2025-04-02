@@ -26,6 +26,8 @@ namespace Library.ViewModels
         {
             AddCommand = new RelayCommand(AddBook, CanAddBook);
             DeleteCommand = new RelayCommand(DeleteBook, CanDeleteBook);
+
+            //запуск принудительной валидации при старте окна для решения "проблемы"
             ValidateProperty(nameof(Title), "");
             ValidateProperty(nameof(Author), "");
             ValidateProperty(nameof(YearOfPublication), 0);
