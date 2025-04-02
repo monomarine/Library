@@ -22,28 +22,37 @@
         <!--Добавление новой книги-->
         <GroupBox Grid.Row="0" Header="Добавить книгу" Margin="0,0,0,10">
             <StackPanel>
-                <TextBox 
+                <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                     Margin="0,0,0,5" Padding="3"/>
-                <TextBox 
+                <TextBox Text="{Binding Author, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                     Margin="0,0,0,5" Padding="3"/>
-                <TextBox 
+                <TextBox Text="{Binding YearOfPublication, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                     Margin="0,0,0,5" Padding="3"/>
-                <Button  Content="Добавить"
+                <Button  Content="Добавить" Command="{Binding AddCommand}"
+                         
                          Margin="0,5,0,0" Padding="5" IsDefault="True"/>
             </StackPanel>
         </GroupBox>
         
         <!--Список книг-->
-        <ListView Grid.Row="1" Margin="0,0,0,10">
-            <GridView >
-                <GridViewColumn Header="Название" Width="120"/>
-                <GridViewColumn Header="Автор" Width="120"/>
-                <GridViewColumn Header="Год" Width="80"/>
-            </GridView>
+        <ListView Grid.Row="1" Margin="0,0,0,10" 
+                  ItemsSource="{Binding Books}"
+                  SelectedItem="{Binding SelectedBook}">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="Название" Width="120"
+                                    DisplayMemberBinding="{Binding Title}"/>
+                    <GridViewColumn Header="Автор" Width="120"
+                                    DisplayMemberBinding="{Binding Author}"/>
+                    <GridViewColumn Header="Год" Width="80"
+                                    DisplayMemberBinding="{Binding YearOfPublication}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
 
         <Button Content="Удалить" Grid.Row="2"
                 HorizontalAlignment="Center"
-                Padding="15,5"/>
+                Padding="15,5"
+                Command="{Binding DeleteCommand}"/>
     </Grid>
 </Window>
